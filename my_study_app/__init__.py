@@ -28,7 +28,7 @@ class Book(db.Model):
     __tablename__ = "books"
     book_id = db.Column(db.Integer, primary_key=True)
     book_name = db.Column(db.String(150), unique=True, nullable=False)
-    book_isbn = db.Column(db.Integer(13), unique=True, nullable=False)
+    book_isbn = db.Column(db.Integer, unique=True, nullable=False)
 
     def __init__(self, book_name):
         self.book_name = book_name
@@ -48,7 +48,6 @@ class Course(db.Model):
     __tablename__ = "courses"
     course_id = db.Column(db.Integer, primary_key=True)
     course_name = db.Column(db.String(150), unique=True, nullable=False)
-    course_
 
     def __init__(self, course_name):
         self.course_name = course_name
