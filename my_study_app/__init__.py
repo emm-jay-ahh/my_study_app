@@ -1,21 +1,27 @@
-from flask import Flask, json, jsonify, request
-import psycopg2
+import os
+from flask import Flask, jsonify, request
+from flask_sqlalchemy import SQLAlchemy
 
+
+(
+    db_user,
+    db_pass,
+    db_name,
+    db_domain
+) = (os.environ.get(item) for item in [
+    "DB_USER",
+    "DB_PASS",
+    "DB_NAME",
+    "DB_DOMAIN"
+    ]
+)
 
 app = Flask(__name__)
 
-connection = psycopg2.connect(
-    database="my_study_app",
-    user="emmjay",
-    password="emmjaypass",
-    host="127.0.0.1",
-    port="5432"
-)
+app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql+psycopg2://{db_user}:{db_pass}@{db_domain}/{db_name}"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-cursor = connection.cursor()
-
-cursor.execute("CREATE TABLE IF NOT EXISTS books (id SERIAL PRIMARY KEY, title VARCHAR);")
-connection.commit()
+db = SQLAlchemy(app)
 
 
 @app.route('/', methods=["GET"])
@@ -60,14 +66,14 @@ def edit_book(id):
     cursor.execute(sql)
     book = cursor.fetchone()
     return jsonify(book)
-    
+
 
 @app.route('/books/<int:id>/', methods=["DELETE"])
 def delete_book(id):
     sql = f"SELECT * FROM books WHERE id = {id};"
     cursor.execute(sql)
     book = cursor.fetchone()
-    
+
     if book:
         sql = f"DELETE FROM books WHERE id = {id};"
         cursor.execute(sql)
