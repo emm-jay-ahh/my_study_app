@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, render_template
 from main import db
 from models.certs import Cert
 from schemas.cert_schema import certs_schema, cert_schema
@@ -12,8 +12,11 @@ certs = Blueprint('certs', __name__)
 
 @certs.route("/certs/", methods=["GET"])
 def get_certs():
-    certs = Cert.query.all()
-    return jsonify(certs_schema.dump(certs))
+    data = {
+    "page_title": "Cert Index",
+    "certs": certs_schema.dump(Cert.query.all())
+    }
+    return render_template("cert_index.html", page_data = data)
 
 
 @certs.route("/certs/", methods=["POST"])

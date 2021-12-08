@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, render_template
 from main import db
 from models.books import Book
 from schemas.book_schema import books_schema, book_schema
@@ -13,8 +13,11 @@ books = Blueprint('books', __name__)
 
 @books.route("/books/", methods=["GET"])
 def get_books():
-    books = Book.query.all()
-    return jsonify(books_schema.dump(books))
+    data = {
+    "page_title": "Book Index",
+    "books": books_schema.dump(Book.query.all())
+    }
+    return render_template("book_index.html", page_data = data)
 
 
 @books.route("/books/", methods=["POST"])

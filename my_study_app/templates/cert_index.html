@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for cert in page_data.certs %}
+        <a href="/certs/{{ cert.cert_id }}/">{{ cert.cert_name }}</a><br/>
+    {% endfor %}
+{% endblock %}
