@@ -22,7 +22,7 @@ users = Blueprint("users", __name__)
 def get_users():
     """Displays a list of users from the database"""
     data = {
-        "page_title": "User Index",
+        "page_title": "Users",
         "users": users_schema.dump(User.query.all())
     }
     return render_template("user_index.html", page_data=data)
