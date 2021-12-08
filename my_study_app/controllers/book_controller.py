@@ -6,15 +6,18 @@ from schemas.book_schema import books_schema, book_schema
 
 books = Blueprint('books', __name__)
 
-# @app.route('/', methods=["GET"])
-#     def home():
-#         return "Welcome to 'My Study App'"
+@books.route('/')
+def homepage():
+    data = {
+        "page_title": "My Study App"
+    }
+    return render_template("homepage.html", page_data=data)
 
 
 @books.route("/books/", methods=["GET"])
 def get_books():
     data = {
-    "page_title": "Book Index",
+    "page_title": "Books",
     "books": books_schema.dump(Book.query.all())
     }
     return render_template("book_index.html", page_data = data)

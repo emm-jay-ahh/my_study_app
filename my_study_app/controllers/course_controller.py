@@ -6,14 +6,10 @@ from schemas.course_schema import courses_schema, course_schema
 
 courses = Blueprint('courses', __name__)
 
-# @app.route('/', methods=["GET"])
-#     def home():
-#         return "Welcome to 'My Study App'"
-
 @courses.route("/courses/", methods=["GET"])
 def get_courses():
     data = {
-    "page_title": "Course Index",
+    "page_title": "Courses",
     "courses": courses_schema.dump(Course.query.all())
     }
     return render_template("course_index.html", page_data = data)

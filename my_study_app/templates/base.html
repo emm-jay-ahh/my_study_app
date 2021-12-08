@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>
-            My Study App
+            Uni App
         </title>
     </head>
     <body>
@@ -10,14 +11,13 @@
             <h1>{{ page_data.page_title }}</h1>
             <nav>
                 <a href="/">Home</a>
-                <a href="/books/">Book Index</a>
-                <a href="/certs/">Cert Index</a>
-                <a href="/courses/">Course Index</a>
+                <a href="/books/">Books</a>
+                <a href="/certs/">Certs</a>
+                <a href="/courses/">Courses</a>
             </nav>
         </header>
         <div>
-            {% block content%}        
-
+            {% block content %}
 
             {% endblock %}
         </div>

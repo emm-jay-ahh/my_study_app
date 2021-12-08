@@ -13,7 +13,7 @@ certs = Blueprint('certs', __name__)
 @certs.route("/certs/", methods=["GET"])
 def get_certs():
     data = {
-    "page_title": "Cert Index",
+    "page_title": "Certs",
     "certs": certs_schema.dump(Cert.query.all())
     }
     return render_template("cert_index.html", page_data = data)

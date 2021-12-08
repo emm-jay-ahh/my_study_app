@@ -36,3 +36,33 @@ def seed_db():
     
     db.session.commit()
     print("Tables seeded")
+
+@db_commands.cli.command("reset")
+def reset_db():
+    """Drops, creates, and seeds tables in one step."""
+    db.drop_all()
+    print("Tables deleted!")
+    
+    db.create_all()
+    print("Tables created!")
+
+    from models.books import Book
+    from models.certs import Cert
+    from models.courses import Course
+    from faker import Faker
+    faker = Faker()
+
+    for i in range(20):
+        book = Book(faker.catch_phrase())
+        db.session.add(book)
+
+    for i in range(20):
+        cert = Cert(faker.catch_phrase())
+        db.session.add(cert)
+
+    for i in range(20):
+        course = Course(faker.catch_phrase())
+        db.session.add(course)
+    
+    db.session.commit()
+    print("Tables seeded!")
