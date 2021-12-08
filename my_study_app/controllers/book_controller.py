@@ -22,7 +22,7 @@ def get_books():
 
 @books.route("/books/", methods=["POST"])
 def create_book():
-    new_book = book_schema.load(request.json)
+    new_book=book_schema.load(request.form)
     db.session.add(new_book)
     db.session.commit()
     return jsonify(book_schema.dump(new_book))

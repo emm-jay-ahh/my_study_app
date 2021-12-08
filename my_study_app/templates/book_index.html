@@ -1,6 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
+    <hr/>
+    <div>
+        <h2>New Book</h2>
+        <div>
+            <form action="/books/" method="POST">
+                <input type="text" name="book_name" placeholder="Book Name...">
+                <button>Create</button>
+            </form>
+        </div>
+    </div>    
+    <hr/>
+    <h2>Book List</h2>
     {% for book in page_data.books %}
-        <a href="/books/{{ book.book_id }}/">{{ book.book_name }}</a><br/>
+        <li><a href="/books/{{ book.book_id }}/">{{ book.book_name }}</a></li>
     {% endfor %}
+    <hr/>
 {% endblock %}

@@ -1,6 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
+    <hr/>
+    <div>
+        <h2>New Cert</h2>
+        <div>
+            <form action="/certs/" method="POST">
+                <input type="text" name="cert_name" placeholder="Cert Name...">
+                <button>Create</button>
+            </form>
+        </div>
+    </div>    
+    <hr/>
+    <h2>Cert List</h2>
     {% for cert in page_data.certs %}
-        <a href="/certs/{{ cert.cert_id }}/">{{ cert.cert_name }}</a><br/>
+        <li><a href="/certs/{{ cert.cert_id }}/">{{ cert.cert_name }}</a></li>
     {% endfor %}
+    <hr/>
 {% endblock %}

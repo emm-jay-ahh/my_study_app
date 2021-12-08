@@ -21,7 +21,7 @@ def get_certs():
 
 @certs.route("/certs/", methods=["POST"])
 def create_cert():
-    new_cert = cert_schema.load(request.json)
+    new_cert=cert_schema.load(request.form)
     db.session.add(new_cert)
     db.session.commit()
     return jsonify(cert_schema.dump(new_cert))
